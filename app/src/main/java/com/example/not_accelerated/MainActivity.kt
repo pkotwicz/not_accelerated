@@ -14,8 +14,9 @@ class MainActivity : AppCompatActivity() {
     private var splashView: FrameLayout? = null
 
     private final val BASE = 0;
-    private final val DELAY_SURFACE_VIEW_BACKGROUND_REMOVAL = 1;
-    private final val DELAY_SURFACE_VIEW_ADD = 2
+    private final val PIXEL_FORMAT_CHANGE_ONLY = 1
+    private final val DELAY_SURFACE_VIEW_BACKGROUND_REMOVAL = 2
+    private final val DELAY_SURFACE_VIEW_ADD = 3
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,9 +50,11 @@ class MainActivity : AppCompatActivity() {
                     if (method == DELAY_SURFACE_VIEW_ADD) {
                         layoutView.addView(surfaceView)
                     }
-                    if (method == DELAY_SURFACE_VIEW_BACKGROUND_REMOVAL) {
+                    if (method == DELAY_SURFACE_VIEW_BACKGROUND_REMOVAL || method == PIXEL_FORMAT_CHANGE_ONLY) {
                         getWindow().setFormat(PixelFormat.TRANSPARENT)
-                        surfaceView.setBackgroundResource(0)
+                        if (method == DELAY_SURFACE_VIEW_BACKGROUND_REMOVAL) {
+                            surfaceView.setBackgroundResource(0)
+                        }
                         surfaceView.invalidate()
                     }
                 } catch (e:Exception) {
