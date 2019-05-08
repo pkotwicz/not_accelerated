@@ -1,0 +1,2 @@
+include ':app'
+rootProject.name='delayed_surface_view_attachment'
